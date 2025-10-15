@@ -1,0 +1,42 @@
+🔹 request()->is()
+
+So khớp path của URL hiện tại.
+
+Hỗ trợ pattern với ký tự *.
+
+Dùng khi bạn quan tâm đến đường dẫn URL (ví dụ /about, /contact, /posts/*).
+
+Ví dụ:
+
+request()->is('about')        // true nếu URL là /about
+request()->is('posts/*')      // true nếu URL là /posts/123, /posts/edit/5
+request()->is('/')            // true nếu là trang chủ
+
+🔹 request()->routeIs()
+
+So khớp tên route (route name trong file web.php).
+
+Cũng hỗ trợ pattern với *.
+
+Dùng khi bạn quan tâm đến logic của route chứ không phải URL cụ thể (rất hữu ích khi URL có thể thay đổi, nhưng tên route thì cố định).
+
+Ví dụ:
+
+// web.php
+Route::get('/about', AboutController::class)->name('about');
+
+// Controller / View
+request()->routeIs('about')       // true nếu đang ở route name "about"
+request()->routeIs('posts.*')     // true nếu route name là "posts.show", "posts.edit", ...
+
+✅ Tóm gọn
+
+is() → match theo path URL.
+
+routeIs() → match theo route name.
+
+👉 Nếu bạn đang viết menu navigation thì nên dùng routeIs() vì:
+
+Route name ít thay đổi hơn URL (nếu đổi /about thành /gioi-thieu thì menu vẫn hoạt động, miễn tên route không đổi).
+
+Code dễ đọc, dễ bảo trì hơn.
