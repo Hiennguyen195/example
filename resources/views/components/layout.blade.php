@@ -24,7 +24,6 @@
                                 <x-nav-link href="/" :active="request() -> routeIs('home')">Home</x-nav-link>
                                 <x-nav-link href="/jobs" :active="request() -> routeIs('jobs_listing')">Jobs</x-nav-link>
                                 <x-nav-link href="/contact" :active="request() -> routeIs('contact')">Contact</x-nav-link>
-                                <x-nav-link href="/jobs/create" :active="request() -> routeIs('create_job')">Create Job</x-nav-link>
                                 {{-- is() match theo path URL, routeIs() match theo route name --}}
                             </div>
                         </div>
@@ -80,7 +79,6 @@
                     <x-nav-link-mobile href="/" :active="request() -> routeIs('home')">Home</x-nav-link-mobile>
                     <x-nav-link-mobile href="/jobs" :active="request() -> routeIs('jobs_listing')">Jobs</x-nav-link-mobile>
                     <x-nav-link-mobile href="/contact" :active="request() -> routeIs('contact')">Contact</x-nav-link-mobile>
-                    <x-nav-link-mobile href="/jobs/create" :active="request() -> routeIs('create_job')">Create Job</x-nav-link-mobile>
                 </div>
                 <div class="border-t border-white/10 pt-4 pb-3">
                     <div class="flex items-center px-5">
@@ -103,8 +101,10 @@
         </nav>
 
         <header class="relative bg-white shadow-sm">
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
+
+                <x-button href="/jobs/create">Create Job</x-button>
             </div>
         </header>
         <main>
