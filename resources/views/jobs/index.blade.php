@@ -5,6 +5,10 @@
         Jobs Listing Page
     </x-slot:heading>
 
+    <x-slot:button>
+        <x-button href="/jobs/create">Create Job</x-button>
+    </x-slot:button>
+
     <div class="space-y-4">
         @foreach ($jobs as $job)
             <a href="/jobs/{{ $job['id'] }}" class="block px-4 py-6 border border-gray-200 rounded-lg">
@@ -20,6 +24,5 @@
         <div>
             {{ $jobs->links() }}
         </div>
-    </div> 
-    
+    </div>     
 </x-layout>
