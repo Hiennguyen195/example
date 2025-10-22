@@ -1,87 +1,21 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
 
-Route::get('/', function () {
+Route::view('/','home')->name('home');
+Route::view('/contact', 'contact')->name('contact');
 
-    return view('home');
+Route::resource('jobs', JobController::class);
 
-})->name('home');
-
-// Index
-Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->latest()->simplePaginate(3);
-    return view('jobs.index', ['jobs' => $jobs]);
-})->name('jobs_listing');
-
-// Create
-Route::get('/jobs/create', function () {
-    return view('jobs.create');
-})->name('create_job');
-
-// Show
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-    return view('jobs.show', ['job' => $job]);
-})->name('job_details');
-
-// Stored
-Route::post('/jobs', function () {
-    //Validation...
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required']
-    ]);
+// Route::controller('JobController')->group(function () {
+//     Route::get('/jobs',  'index')->name('job_listings');
+//     Route::get('/jobs/create',  'create')->name('create_job');
+//     Route::get('/jobs/{job}',  'show')->name('job_details');
+//     Route::post('/jobs',  'store')->name('job_store');
+//     Route::get('/jobs/{job}/edit',  'edit')->name('job_edit');
+//     Route::patch('/jobs/{job}',  'update')->name('job_update');
+//     Route::delete('/jobs/{job}',  'destroy')->name('job_delete');
+// });
 
 
-    Job::create([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'employer_id' => 1,
-    ]);
-
-    return redirect('/jobs');
-});
-
-// Edit
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
-    return view('jobs.edit', ['job' => $job]);
-})->name('job_edit');
-
-// Update
-Route::patch('/jobs/{id}', function ($id) {
-    // Validate
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required']
-    ]);
-    // Authorize (On hold...)
-
-    // Update the job
-    $job = Job::findOrFail($id);
-
-    // $job->title = request('title');
-    // $job->salary = request('salary');
-    // $job->save();
-
-    $job->update([
-        'title' => request('title'),
-        'salary' => request('salary'),
-    ]);
-    //Redirect
-    return redirect('/jobs/'. $job->id);
-})->name('job_update');
-
-// Destroy
-Route::delete('/jobs/{id}', function ($id) {
-    $job = Job::findOrFail($id);
-    $job->delete();
-
-    return redirect('/jobs'); 
-})->name('job_delete');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
