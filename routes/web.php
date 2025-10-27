@@ -17,6 +17,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 // Login
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store'])->name('login_store');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
 // Route::controller('JobController')->group(function () {
 //     Route::get('/jobs',  'index')->name('job_listings');

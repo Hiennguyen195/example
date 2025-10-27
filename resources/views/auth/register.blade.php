@@ -49,7 +49,7 @@
                     <x-form-field>
                         <x-form-lable for="password_confirmation">Confirm Password</x-form-lable>
                         <div class="mt-2">
-                            <x-form-input id="password_confirmation" name="password_confirmation" type="password_confirmation" required/>
+                            <x-form-input id="password_confirmation" name="password_confirmation" type="password" required/>
                             <x-form-error name="password_confirmation" />
                         </div>
                     </x-form-field>
