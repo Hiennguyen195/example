@@ -7,5 +7,5 @@
 </p>
 
 <p>
-    <a href="{{ url('/jobs/') . $job->id }}">View your job listing</a>
+    <a href="{{ url("/jobs/" . $job->id) }}">View your job listing</a>
 </p>
